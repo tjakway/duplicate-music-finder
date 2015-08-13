@@ -8,3 +8,6 @@ hs_err_pid*
 .gradle
 #gradle build dir
 build/
+
+#ignore vim swap files
+*.swp
