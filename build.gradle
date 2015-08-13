@@ -8,11 +8,3 @@ dependencies {
     compile group: 'com.google.guava', name: 'guava', version: '18.0'
     compile name: 'jaudiotagger-2.2.3.jar' //JAudiotagger doesn't push to Maven Central
 }
-
-sourceSets {
-    main {
-        java {
-            srcDir 'src/'
-        }
-    }
-}
