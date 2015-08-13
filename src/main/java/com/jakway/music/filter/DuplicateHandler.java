@@ -1,4 +1,4 @@
-package com.jakway.music.song;
+package com.jakway.music.filter;
 
 public class DuplicateHandler
 {

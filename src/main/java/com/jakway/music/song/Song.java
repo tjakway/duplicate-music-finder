@@ -1,6 +1,13 @@
 package com.jakway.music.song;
 
-public class Song
+import com.jakway.music.song.SongKey;
+import org.jaudiotagger.audio.AudioFile;
+
+public class Song extends AudioFile
 {
+    SongKey getSongKey()
+    {
+        return null;
+    }
 
 }
