@@ -14,7 +14,7 @@ public class Settings
         return TRACK_COMPARE_LENGTH;
     }
 
-    private static final DEFAULT_MAX_LEVENSHTEIN_DISTANCE=2;
+    private static final int DEFAULT_MAX_LEVENSHTEIN_DISTANCE=2;
     /**
      * the maximum Levenshtein distance 2 strings can differ to be considered similar
      */

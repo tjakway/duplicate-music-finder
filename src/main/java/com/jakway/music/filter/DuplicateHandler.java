@@ -1,5 +1,8 @@
 package com.jakway.music.filter;
 
+import com.jakway.music.Settings;
+import org.apache.commons.lang3.StringUtils;
+
 public class DuplicateHandler
 {
 
@@ -9,6 +12,15 @@ public class DuplicateHandler
      */
     private static final boolean stringsFuzzyMatch(String first, String second)
     {
+        //this function returns -1 if the levenshtein distance > threshold
+        //otherwise it returns the distance
+        //we don't care about the distance so long as its smaller than the maximum amount to consider the strings similar
+        int threshold = Settings.getMaxLevenshteinDistance();
+        int distance = StringUtils.getLevenshteinDistance(first, second, threshold);
+        if(distance == -1)
+            return false;
+        else
+            return true;
 
     }
 }
