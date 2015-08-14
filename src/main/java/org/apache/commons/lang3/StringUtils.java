@@ -1,3 +1,8 @@
+/** *NOTICE*
+ * This work uses software licensed under the Apache License Version 2.0 (January 2004, http://www.apache.org/licenses/) which requires a statement of changes made to the licensed software.
+ * This work contains a copy of org.apache.commons.lang3.StringUtils.java, modified to only include 2 functions, both named getLevenshteinDistance.  It was retrieved from the Apache Commons Lang package, version 3.4 on Thursday, August 13, 2015.
+ * This text also appears in MODIFICATIONS.txt
+ */
 
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more
