@@ -10,4 +10,7 @@ public class Song extends AudioFile
         return null;
     }
 
+    /**
+     * WARNING: equals() MUST BE A DEEP COMPARISON FOR OBJECT EQUALITY, *NOT* A TEST IF THE SONGS MATCH!
+     */
 }
