@@ -1,7 +1,9 @@
 package com.jakway.music.song;
 
 import com.jakway.music.Settings;
+import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.audio.generic.GenericAudioHeader;
+import org.jaudiotagger.tag.FieldKey;
 
 /**
  * This class compares songs to see if they're "duplicates"
@@ -10,10 +12,34 @@ import org.jaudiotagger.audio.generic.GenericAudioHeader;
 public class SongKey 
 {
     private Song song;
+    private String artist, album, title;
+    private int year = -1;
 
     public SongKey(Song song)
     {
         this.song = song;
+        Tag tag = song.getTag();
+        //some formats don't require tags, some require tags (which may still be empty)
+        if(tag != null && !tag.isEmpty())
+        {
+            artist = tag.getFirst(FieldKey.ARTIST);
+            album = tag.getFirst(FieldKey.ALBUM);
+            title = tag.getFirst(FieldKey.TITLE);
+            try {
+            year = Integer.parseInt(tag.getFirst(FieldKey.YEAR));
+            } catch(NumberFormatException e)
+            {
+                //ignore the year field if it isn't well formed
+                year = -1;
+            }
+        }
+        //make any empty strings null to make comparisons and debugging easier
+        if(artist != null && artist.isEmpty())
+            artist = null;
+        if(album != null && album.isEmpty())
+            album = null;
+        if(title != null && title.isEmpty())
+            title = null;
     }
 
     public Song getSong()
