@@ -1,7 +1,24 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
 
-//    JAUDIOTAGGER_SRC_JARNAME='libs/jaudiotagger-2.2.3-sources'
+/* unzip the jaudiotagger source jar into its own directory in the build folder 
+   it's used in the gen_tags task to generate the tag files
+   extract it into the build folder so it's cleaned up by `gradle clean`*/
+task unzip_jaudiotagger_src(type: Copy) {
+    def jaudiotaggerSrcJar = file("libs/jaudiotagger-2.2.3-sources.jar")
+    def outputDir = file("${buildDir}/jaudiotagger_sources")
+
+    from zipTree(jaudiotaggerSrcJar)
+    into outputDir
+}
+
+/* generate tags for the jaudiotagger sources and the main sources */
+task gen_tags(dependsOn: 'unzip_jaudiotagger_src', type: Exec) {
+    executable "ctags"
+    //don't need to escape the wildcard because we're not running a shell, so the shell won't expand the wildcards
+    //see ctags manpage, section --exclude
+    args "-R", '--exclude="*.html"', "${buildDir}/jaudiotagger_sources", sourceSets.main.java.srcDirs
+}
 
 repositories {
     mavenCentral()
