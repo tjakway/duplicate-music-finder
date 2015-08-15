@@ -17,8 +17,12 @@ task gen_tags(dependsOn: 'unzip_jaudiotagger_src', type: Exec) {
     executable "ctags"
     //don't need to escape the wildcard because we're not running a shell, so the shell won't expand the wildcards
     //see ctags manpage, section --exclude
-    args "-R", "-V", '--exclude=*.html', "${buildDir}/jaudiotagger_sources", sourceSets.main.java.srcDirs[0]
+    args "-R", '--exclude=*.html', '--exclude=META_INF', "${buildDir}/jaudiotagger_sources", sourceSets.main.java.srcDirs[0]
 }
+
+//regenerate the tag file every build
+//note that vim searches the tag file from the start every time, there's no need to reload it
+build.dependsOn gen_tags
 
 repositories {
     mavenCentral()
