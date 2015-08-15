@@ -115,4 +115,22 @@ public class SongKey
 
         return true;
     }
+
+    /**
+     * Returns true ONLY if title and artist match but albums do not match
+     * this method will return true ONLY for a subset of the SongKeys for which equals returns true
+     * that is, not every SongKey that is equal is a possible match
+     * this method exists to sort the uncertain matches from the certain ones
+     */
+    public boolean possibleMatch(SongKey otherKey)
+    {
+        final boolean artistsMatch =  DuplicateHandler.stringsFuzzyMatch(this.getArtist(), otherKey.getArtist());
+        final boolean albumsMatch = DuplicateHandler.stringsFuzzyMatch(this.getAlbum(), otherKey.getAlbum());
+        final boolean titlesMatch = DuplicateHandler.stringsFuzzyMatch(this.getTitle(), otherKey.getTitle());
+
+        if(artistsMatch && titlesMatch && (!albumsMatch))
+            return true;
+        else
+            return false;
+    }
 }
