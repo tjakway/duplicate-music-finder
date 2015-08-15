@@ -1,4 +1,5 @@
 apply plugin: 'java'
+apply plugin: 'eclipse'
 
 repositories {
     mavenCentral()
@@ -9,5 +10,7 @@ repositories {
 
 dependencies {
     compile group: 'com.google.guava', name: 'guava', version: '18.0'
-    compile name: 'jaudiotagger-2.2.3' //:Audiotagger doesn't push to Maven Central
+    compile name: 'jaudiotagger-2.2.3' //Audiotagger doesn't push to Maven Central
+    compile name: 'jaudiotagger-2.2.3-javadoc'
+    compile name: 'jaudiotagger-2.2.3-sources'
 }
