@@ -2,6 +2,7 @@ package com.jakway.music.song;
 
 import com.jakway.music.Settings;
 import com.jakway.music.filter.DuplicateHandler;
+import com.jakway.music.utils.Utils;
 
 import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.audio.generic.GenericAudioHeader;
@@ -91,21 +92,12 @@ public class SongKey
             return false;
         SongKey otherKey = (SongKey) other;
 
+        //TODO: should songs be considered duplicates even if albums don't match?
         /*
-         * the maximum levenshtein distance 2 strings can differ by
-         * and still be considered equal
-         * not used for track length comparison because thats not a string
+         * make sure all fields match
          */
-        final int maxStringDifference = Settings.getMaxLevenshteinDistance();
-
-        final boolean artistsMatch =  DuplicateHandler.stringsFuzzyMatch(this.getArtist(), otherKey.getArtist());
-        final boolean albumsMatch = DuplicateHandler.stringsFuzzyMatch(this.getAlbum(), otherKey.getAlbum());
-        final boolean titlesMatch = DuplicateHandler.stringsFuzzyMatch(this.getTitle(), otherKey.getTitle());
-
-        if(!artistsMatch || !albumsMatch || !titlesMatch)
-        {
+        if(Utils.allTrue(getMatchingResults(otherKey)))
             return false;
-        }
 
         //compare track lengths
         //if they differ by more than the maximum specified in Settings the files are not considered equal
