@@ -10,7 +10,7 @@ public class DuplicateHandler
      * TODO: implement
      * This function tests if the strings are similar ("fuzzy matching")--use the Levenshtein distance functions from Apache Common's String Utils
      */
-    private static final boolean stringsFuzzyMatch(String first, String second)
+    public static final boolean stringsFuzzyMatch(String first, String second)
     {
         //this function returns -1 if the levenshtein distance > threshold
         //otherwise it returns the distance
@@ -21,6 +21,5 @@ public class DuplicateHandler
             return false;
         else
             return true;
-
     }
 }
