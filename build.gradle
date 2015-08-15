@@ -1,6 +1,8 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
 
+//    JAUDIOTAGGER_SRC_JARNAME='libs/jaudiotagger-2.2.3-sources'
+
 repositories {
     mavenCentral()
     flatDir {
