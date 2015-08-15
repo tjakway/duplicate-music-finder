@@ -12,3 +12,9 @@ build/
 #ignore vim swap files
 *.swp
 bin/
+
+#ignore eclipse project files
+#generated with the eclipse gradle plugin
+.project
+.settings/
+.classpath
