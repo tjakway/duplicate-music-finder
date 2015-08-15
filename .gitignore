@@ -11,3 +11,4 @@ build/
 
 #ignore vim swap files
 *.swp
+bin/
