@@ -124,14 +124,20 @@ public class SongKey
      */
     public boolean possibleMatch(SongKey otherKey)
     {
-        final boolean artistsMatch =  DuplicateHandler.stringsFuzzyMatch(this.getArtist(), otherKey.getArtist());
-        final boolean albumsMatch = DuplicateHandler.stringsFuzzyMatch(this.getAlbum(), otherKey.getAlbum());
-        final boolean titlesMatch = DuplicateHandler.stringsFuzzyMatch(this.getTitle(), otherKey.getTitle());
-
-        if(artistsMatch && titlesMatch && (!albumsMatch))
+        boolean[] matches = getMatchingResults(otherKey);
+        assert matches.length == 3;
+        
+        /**
+         * checks (in order):
+         * artist
+         * title
+         * !album
+         */
+        if(matches[0] && matches[1] && (!matches[2]))
             return true;
         else
             return false;
+
     }
 
     /**
