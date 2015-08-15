@@ -133,4 +133,39 @@ public class SongKey
         else
             return false;
     }
+
+    /**
+     * returns an array of size 3: {artistsMatch, titlesMatch, albumsMatch}
+     * if artist or title are null in either song, the artist or title (respectively) are considered not to match
+     * if album is null in either key the albums are considered to match
+     * This is because there are more duplicate songs with missing album fields than there are duplicate songs missing artist or title info
+     */
+    private boolean[] getMatchingResults(SongKey otherKey)
+    {
+        boolean artistsMatch;
+
+        //if the artist or title fields are null, the songs cannot match
+        //otherwise we'd get way too many false positives from songs that don't have artist or title data
+        if(this.getArtist() == null || otherKey.getArtist() == null)
+            artistsMatch = false;
+        else
+            artistsMatch = DuplicateHandler.stringsFuzzyMatch(this.getArtist(), otherKey.getArtist());
+
+        boolean titlesMatch;
+        if(this.getTitle() == null || otherKey.getTitle() == null)
+            titlesMatch = false;
+        else
+            titlesMatch = DuplicateHandler.stringsFuzzyMatch(this.getTitle(), otherKey.getTitle());
+
+        //BUT--album information is more often mangled in the tag.  2 songs can be duplicates even if the albums don't match
+        //so if the album field is null in either SongKey, consider the albums matching
+        
+        boolean albumsMatch;
+        if(this.getAlbum() == null || otherKey.getAlbum() == null)
+            albumsMatch = true;
+        else
+            albumsMatch = DuplicateHandler.stringsFuzzyMatch(this.getAlbum(), otherKey.getAlbum());
+
+        return new boolean[] { artistsMatch, titlesMatch, albumsMatch };
+    }
 }
