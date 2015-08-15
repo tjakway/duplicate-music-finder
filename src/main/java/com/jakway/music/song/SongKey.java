@@ -19,7 +19,8 @@ public class SongKey
     {
         this.song = song;
         Tag tag = song.getTag();
-        //some formats don't require tags, some require tags (which may still be empty)
+        //some formats don't require tags
+        //for the formats that require tags they may still be empty tags
         if(tag != null && !tag.isEmpty())
         {
             artist = tag.getFirst(FieldKey.ARTIST);
@@ -46,8 +47,6 @@ public class SongKey
     {
         return song;
     }
-
-    
 
     @Override
     public boolean equals(Object other)
