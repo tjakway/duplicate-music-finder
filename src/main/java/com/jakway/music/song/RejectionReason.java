@@ -5,5 +5,7 @@ package com.jakway.music.song;
  */
 public enum RejectionReason
 {
-    PERMISSIONS, HIDDEN_FILE
+    PERMISSIONS, HIDDEN_FILE,
+    /** generic value indicating a problem with the file, e.g. does not exist */
+    FILE_ERROR
 }
