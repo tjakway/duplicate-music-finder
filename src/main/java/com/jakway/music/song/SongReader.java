@@ -22,8 +22,10 @@ public class SongReader
     public ReadSongsResult readSongs(File dir)
     {
         //sort into valid and invalid files
+        assembleSongFiles(dir);
 
-        //use AudioFileIO to select the appropriate reader for each file type
+
+            //use AudioFileIO to select the appropriate reader for each file type
         
         return null;
     }

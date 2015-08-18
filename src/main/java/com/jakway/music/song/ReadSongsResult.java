@@ -11,21 +11,21 @@ import java.util.ArrayList;
 public class ReadSongsResult
 {
     private Multimap<RejectionReason, File> rejectedFiles;
-    private ArrayList<File> validFiles;
+    private ArrayList<Song> validSongs;
 
     /**
      * @param rejectedFiles
-     * @param validFiles
+     * @param validSongs
      */
-    public ReadSongsResult(Multimap<RejectionReason, File> rejectedFiles, ArrayList<File> validFiles) {
+    public ReadSongsResult(Multimap<RejectionReason, File> rejectedFiles, ArrayList<Song> validSongs) {
         this.rejectedFiles = rejectedFiles;
-        this.validFiles = validFiles;
+        this.validSongs = validSongs;
 
         //never store empty collections!  setting them to null makes it easier to catch some very annoying bugs
         if(this.rejectedFiles.isEmpty())
             this.rejectedFiles = null;
-        if(this.validFiles.isEmpty())
-            this.validFiles = null;
+        if(this.validSongs.isEmpty())
+            this.validSongs = null;
     }
 
     /**
@@ -36,10 +36,9 @@ public class ReadSongsResult
     }
 
     /**
-     * @return the validFiles
+     * @return the validSongs
      */
-    public ArrayList<File> getValidFiles() {
-        return validFiles;
+    public ArrayList<Song> getValidSongs() {
+        return validSongs;
     }
-
 }
