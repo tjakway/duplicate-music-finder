@@ -3,6 +3,8 @@ package com.jakway.music.song;
 import java.io.File;
 import java.util.ArrayList;
 
+import org.jaudiotagger.audio.AudioFileFilter;
+
 import com.google.common.collect.ListMultimap;
 import com.google.common.io.Files;
 
@@ -29,6 +31,7 @@ public class SongReader
         for(File thisFile : Files.fileTreeTraverser().preOrderTraversal(dir))
         {
             //ignore directories
+            //this isn't a rejected file because it isn't a "file"
             if(thisFile.isDirectory())
                 continue;
 
@@ -56,6 +59,22 @@ public class SongReader
                 rejectedFiles.put(RejectionReason.PERMISSIONS, thisFile);
                 continue;
             }
+
+            //check that this is a valid audio file
+            AudioFileFilter fileChecker = new AudioFileFilter(false); //don't allow directories
+            //checks if the file matches certain parameters (e.g. not hidden, permissions OK) and if the extension is one of the supported formats
+            //AudioFileFilter.accept repeats a lot of the work done by this method but doesn't give very much information about a problem if one occurs.  It doesn't throw exceptions, it just returns false.
+            //we've already checked nearly everything that could go wrong so it's likely a format problem if accept() returns false
+            if(!fileChecker.accept(thisFile))
+            {
+                rejectedFiles.put(RejectionReason.INVALID_AUDIO_FILE, thisFile);
+                continue;
+            }
+
+
+            //if we've gotten here the file is OK
+            //add it to the list of acceptable files
+            validFiles.add(thisFile);
         }
     }
 
