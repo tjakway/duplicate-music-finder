@@ -53,10 +53,9 @@ public class SongReader
             {
                 rejectedFiles.put(RejectionReason.READ_ERROR, thisFile);
             }
-
         }
         
-        return null;
+        return new ReadSongsResult(rejectedFiles, songs);
     }
 
     /**
