@@ -4,7 +4,7 @@ import com.google.common.collect.Multimap;
 import java.io.File;
 import java.util.ArrayList;
 
-public class ReadSongResult
+public class ReadSongsResult
 {
     private Multimap<RejectionReason, File> rejectedFiles;
     private ArrayList<File> validFiles;
@@ -13,7 +13,7 @@ public class ReadSongResult
      * @param rejectedFiles
      * @param validFiles
      */
-    public ReadSongResult(Multimap<RejectionReason, File> rejectedFiles, ArrayList<File> validFiles) {
+    public ReadSongsResult(Multimap<RejectionReason, File> rejectedFiles, ArrayList<File> validFiles) {
         this.rejectedFiles = rejectedFiles;
         this.validFiles = validFiles;
     }
