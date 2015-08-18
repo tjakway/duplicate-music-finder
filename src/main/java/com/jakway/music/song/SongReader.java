@@ -1,9 +1,13 @@
 package com.jakway.music.song;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.jaudiotagger.audio.AudioFileFilter;
+import org.jaudiotagger.audio.AudioFileIO;
+import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
+import org.jaudiotagger.tag.TagException;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
@@ -17,14 +21,39 @@ import com.google.common.io.Files;
 public class SongReader
 {
     private ListMultimap<RejectionReason, File> rejectedFiles = ArrayListMultimap.create();
+
+    /** valid files as determined by assembleSongFiles
+     *  *NOT* the same as valid songs! */
     private ArrayList<File> validFiles = new ArrayList<File>();
 
-    public ReadSongsResult readSongs(File dir)
+    public ReadSongsResult readSongs(File dir) throws Exception
     {
         //sort into valid and invalid files
         assembleSongFiles(dir);
 
+        ArrayList<Song> songs = new ArrayList<Song>(validFiles.size());
 
+        for(File thisFile : validFiles)
+        {
+            try {
+            songs.add(new Song(AudioFileIO.read(thisFile)));
+            }
+            catch(TagException e)
+            {
+                rejectedFiles.put(RejectionReason.TAG_ERROR, thisFile);
+            }
+            catch(InvalidAudioFrameException e)
+            {
+                rejectedFiles.put(RejectionReason.INVALID_AUDIO_FRAME, thisFile);
+            }
+            //don't catch Exception because we want the program to crash if it's
+            //some other strange error we didn't anticipate
+            catch(IOException e)
+            {
+                rejectedFiles.put(RejectionReason.READ_ERROR, thisFile);
+            }
+
+        }
             //use AudioFileIO to select the appropriate reader for each file type
         
         return null;

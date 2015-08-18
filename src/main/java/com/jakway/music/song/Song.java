@@ -30,6 +30,11 @@ public class Song extends AudioFile
         super(s, audioHeader, tag);
     }
 
+    public Song(AudioFile audioFile)
+    {
+        super(audioFile.getFile(), audioFile.getAudioHeader(), audioFile.getTag());
+    }
+
 
     
 
