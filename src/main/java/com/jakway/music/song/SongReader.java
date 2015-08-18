@@ -21,7 +21,10 @@ public class SongReader
 
     public ReadSongsResult readSongs(File dir)
     {
-        //TODO: IMPLEMENT
+        //sort into valid and invalid files
+
+        //use AudioFileIO to select the appropriate reader for each file type
+        
         return null;
     }
 
