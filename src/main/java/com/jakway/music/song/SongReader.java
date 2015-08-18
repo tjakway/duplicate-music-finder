@@ -36,6 +36,7 @@ public class SongReader
         for(File thisFile : validFiles)
         {
             try {
+            //use AudioFileIO to select the appropriate reader for each file type
             songs.add(new Song(AudioFileIO.read(thisFile)));
             }
             catch(TagException e)
@@ -54,7 +55,6 @@ public class SongReader
             }
 
         }
-            //use AudioFileIO to select the appropriate reader for each file type
         
         return null;
     }
