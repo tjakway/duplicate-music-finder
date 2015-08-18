@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import org.jaudiotagger.audio.AudioFileFilter;
 
+import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 import com.google.common.io.Files;
 
@@ -15,8 +16,8 @@ import com.google.common.io.Files;
  */
 public class SongReader
 {
-    private ListMultimap<RejectionReason, File> rejectedFiles;
-    private ArrayList<File> validFiles;
+    private ListMultimap<RejectionReason, File> rejectedFiles = ArrayListMultimap.create();
+    private ArrayList<File> validFiles = new ArrayList<File>();
 
     public ReadSongsResult readSongs(File dir)
     {
@@ -24,6 +25,9 @@ public class SongReader
         return null;
     }
 
+    /**
+     * populates rejectedFiles and validFiles
+     */
     private void assembleSongFiles(File dir)
     {
         //iterate through every file in this directory
@@ -77,5 +81,4 @@ public class SongReader
             validFiles.add(thisFile);
         }
     }
-
 }
