@@ -13,11 +13,6 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 import com.google.common.io.Files;
 
-/**
- * TODO exclude:
- * -hidden files
- * -files we don't have permission to read (warn user)
- */
 public class SongReader
 {
     private ListMultimap<RejectionReason, File> rejectedFiles = ArrayListMultimap.create();
